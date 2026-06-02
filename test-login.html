@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Firebase Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #2563EB, #1D4ED8);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        h2 {
+            color: #2563EB;
+            text-align: center;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #2563EB;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #1D4ED8;
+        }
+        .error {
+            background: #fee;
+            color: #c00;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .success {
+            background: #efe;
+            color: #0a0;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .info {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🔐 Lead Trend</h2>
+        <h3 style="text-align:center; color:#666;">Test Login</h3>
+        
+        <div id="message"></div>
+        
+        <input type="email" id="email" placeholder="Email" value="admin@leadtrend.com">
+        <input type="password" id="password" placeholder="Password" value="Admin123456">
+        <button onclick="testLogin()">Login</button>
+        
+        <div class="info" style="margin-top: 15px;">
+            <strong>Default credentials:</strong><br>
+            Email: admin@leadtrend.com<br>
+            Password: Admin123456
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+    
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyAfaVfpgWBP0l1xnt0s91mR2C6mSWAam6U",
+            authDomain: "lead-trend-18dd1.firebaseapp.com",
+            projectId: "lead-trend-18dd1",
+            storageBucket: "lead-trend-18dd1.firebasestorage.app",
+            messagingSenderId: "987580567617",
+            appId: "1:987580567617:web:ad9eb476ac5d22d099f6c0",
+            measurementId: "G-LG5549VCC9"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        window.testLogin = async () => {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const messageDiv = document.getElementById('message');
+            
+            messageDiv.innerHTML = '<div class="info">🔄 Testing login...</div>';
+            
+            try {
+                const userCredential = await auth.signInWithEmailAndPassword(email, password);
+                const user = userCredential.user;
+                
+                messageDiv.innerHTML = `
+                    <div class="success">
+                        ✅ Login Successful!<br><br>
+                        User ID: ${user.uid}<br>
+                        Email: ${user.email}<br><br>
+                        <strong>Now go back to http://localhost:3000 and login!</strong>
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Login error:', error);
+                let errorMsg = error.message;
+                if (error.code === 'auth/user-not-found') {
+                    errorMsg = 'User not found! Please create the account in Firebase Console first.';
+                } else if (error.code === 'auth/wrong-password') {
+                    errorMsg = 'Wrong password!';
+                } else if (error.code === 'auth/invalid-credential') {
+                    errorMsg = 'Invalid credentials. User does not exist or password is incorrect.';
+                }
+                messageDiv.innerHTML = `<div class="error">❌ ${errorMsg}</div>`;
+            }
+        };
+    </script>
+</body>
+</html>

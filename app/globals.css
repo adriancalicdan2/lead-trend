@@ -1,0 +1,241 @@
+/* app/globals.css */
+@import 'tailwindcss';
+
+
+/* Your custom styles below */
+
+:root {
+  --primary: #2563EB;
+  --primary-dark: #1D4ED8;
+  --primary-light: #3B82F6;
+  --secondary: #60A5FA;
+  --success: #10B981;
+  --danger: #EF4444;
+  --warning: #F59E0B;
+  --info: #06B6D4;
+  --purple: #8B5CF6;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  min-height: 100vh;
+}
+
+.login-container {
+  max-width: 400px;
+  margin: 100px auto;
+}
+
+.card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.clock-card {
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  text-align: center;
+  margin: 2rem 0;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.clock-time {
+  font-size: 3.5rem;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.clock-date {
+  font-size: 1.2rem;
+  color: #6c757d;
+  margin-bottom: 2rem;
+}
+
+.btn-clock {
+  padding: 15px 40px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-radius: 10px;
+  margin: 0 10px;
+  min-width: 160px;
+  transition: all 0.3s ease;
+}
+
+.btn-clock:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.btn-clock-in {
+  background: linear-gradient(135deg, var(--success), #059669);
+  border: none;
+  color: white;
+}
+
+.btn-clock-out {
+  background: linear-gradient(135deg, var(--danger), #DC2626);
+  border: none;
+  color: white;
+}
+
+.status-badge {
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 1rem;
+  display: inline-block;
+}
+
+.status-in {
+  background: linear-gradient(135deg, var(--success), #059669);
+  color: white;
+}
+
+.status-out {
+  background: linear-gradient(135deg, var(--danger), #DC2626);
+  color: white;
+}
+
+.real-time-clock {
+  background: var(--primary);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 25px;
+  font-family: 'Courier New', monospace;
+  font-weight: 500;
+}
+
+.employee-card {
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.employee-card:hover {
+  border-color: var(--primary);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.employee-card.active {
+  border-color: var(--info);
+  background: #f0f9ff;
+}
+
+.duration-bar {
+  height: 10px;
+  background: #e2e8f0;
+  border-radius: 5px;
+  margin: 10px 0;
+  overflow: hidden;
+}
+
+.duration-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--success), var(--primary));
+  border-radius: 5px;
+  transition: width 0.5s ease;
+}
+
+.welcome-card {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.stats-card {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.stats-card h3 {
+  color: var(--primary);
+  margin-bottom: 5px;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(37, 99, 235, 0.05);
+}
+
+.badge-role-admin {
+  background: linear-gradient(135deg, #EF4444, #DC2626);
+  color: white;
+}
+
+.badge-role-head {
+  background: linear-gradient(135deg, #F59E0B, #D97706);
+  color: white;
+}
+
+.badge-role-employee {
+  background: linear-gradient(135deg, #06B6D4, #0891B2);
+  color: white;
+}
+
+.btn-primary-custom {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  border: none;
+  color: white;
+}
+
+.btn-primary-custom:hover {
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+  color: white;
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255,255,255,.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.modal.show {
+  display: block;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 1050;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.pagination .page-link {
+  color: var(--primary);
+}
+
+.pagination .page-link:hover {
+  background-color: rgba(37, 99, 235, 0.1);
+  color: var(--primary-dark);
+}
